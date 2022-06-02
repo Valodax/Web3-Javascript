@@ -96,7 +96,7 @@ export default function LotteryEntrance() {
                         disabled={isLoading || isFetching}
                     >
                         {isLoading || isFetching ? (
-                            <div className="animate-spin spinner-border h-8 w-8 border-b-2 rounded-full"></div>
+                            <div className="animate-spin spinner-border h-6 w-6 border-b-2 rounded-full"></div>
                         ) : (
                             <div>Enter Raffle</div>
                         )}
