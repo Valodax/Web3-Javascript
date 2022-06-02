@@ -17,8 +17,8 @@ error Raffle__TransferFailed();
 error Raffle__NotOpen();
 error Raffle__UpkeepNotNeeded(uint256 currentBalance, uint256 numPlayers, uint256 raffleState);
 
-/** @title Sample Raffle Contract
-* @author Mitchell Spencer
+/** @title Sample Raffle Contract V2
+* @author Mitchell Spencer 
 * @notice This contract is for creating an untamperable decentralized smart contract lottery
 * @dev This implemtns ChainlinkVRF V2 and Chainlink Keepers
 
