@@ -5,10 +5,11 @@ import { useEffect, useState } from "react"
 import { ethers } from "ethers"
 import { useNotification } from "web3uikit"
 
-export default function LotteryEntrance() {
+export default function LotteryEntrance(props) {
     const { chainId: chainIdHex, isWeb3Enabled, Moralis } = useMoralis()
     const chainId = parseInt(chainIdHex)
     console.log(`ChainId is ${chainId}`)
+    console.log(contractAddresses[chainId])
     const raffleAddress = chainId in contractAddresses ? contractAddresses[chainId][0] : null
     const [entranceFee, setEntranceFee] = useState("0")
     const [numPlayers, setNumPlayers] = useState("0")
@@ -26,6 +27,7 @@ export default function LotteryEntrance() {
         functionName: "enterRaffle",
         params: {},
         msgValue: entranceFee,
+        onError: (error) => console.log(error),
     })
 
     const { runContractFunction: getEntranceFee } = useWeb3Contract({
@@ -33,6 +35,7 @@ export default function LotteryEntrance() {
         contractAddress: raffleAddress,
         functionName: "getEntranceFee",
         params: {},
+        onError: (error) => console.log(error),
     })
 
     const { runContractFunction: getNumberOfPlayers } = useWeb3Contract({
@@ -40,6 +43,7 @@ export default function LotteryEntrance() {
         contractAddress: raffleAddress,
         functionName: "getNumberOfPlayers",
         params: {},
+        onError: (error) => console.log(error),
     })
 
     const { runContractFunction: getRecentWinner } = useWeb3Contract({
@@ -47,6 +51,7 @@ export default function LotteryEntrance() {
         contractAddress: raffleAddress,
         functionName: "getRecentWinner",
         params: {},
+        onError: (error) => console.log(error),
     })
 
     async function updateUI() {
@@ -98,19 +103,26 @@ export default function LotteryEntrance() {
                         {isLoading || isFetching ? (
                             <div className="animate-spin spinner-border h-6 w-6 border-b-2 rounded-full"></div>
                         ) : (
-                            <div>Enter Raffle</div>
+                            <div>Buy a Ticket</div>
                         )}
                     </button>
                     <br />
                     <br />
                     <div>
-                        The Entrance Fee is {ethers.utils.formatUnits(entranceFee, "ether")} ETH{" "}
+                        The current entrance fee is{" "}
+                        {ethers.utils.formatUnits(entranceFee, "ether")} ETH{" "}
                     </div>
-                    <div>Number of Players {numPlayers}</div>
-                    <div>Recent Winner {recentWinner}</div>
+                    <div>The current number of entrants is {numPlayers}</div>
+                    <div>
+                        The most recent winner is {recentWinner.slice(0, 6)}...
+                        {recentWinner.slice(recentWinner.length - 4)}.
+                    </div>
                 </div>
             ) : (
-                <div>No Raffle Address Detected</div>
+                <div>
+                    No address detected. <br />
+                    Please connect a valid account on Rinkeby to continue. <br />
+                </div>
             )}
         </div>
     )
