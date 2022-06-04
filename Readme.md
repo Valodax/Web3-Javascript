@@ -1,4 +1,6 @@
-<h1>Decentralised Lottery Application (Final Build)</h1>
+<h1>The following is a collection of my Web3 Projects built using Hardhat and various JavaScriptlibraries.</h1>
+
+<h1>Project 1: Decentralised Lottery Application</h1>
 Please note that this version of the DAPP is currently only live on the Rinkeby network.
 
 [<h3>View live on IPFS here.</h3>](crimson-union-3359.on.fleek.co)
