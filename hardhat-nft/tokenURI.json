@@ -1,0 +1,11 @@
+{
+    "name": "Tonja Toronja",
+    "description": "Some juicy grapefruits!",
+    "image": "ipfs://bafybeiduybuab34atobekfsb76i7z7vmjib7yh7bq3sllhje6xlnwdhrii/",
+    "attributes": [
+        {
+            "trait_type": "juiciness",
+            "value": 100
+        }
+    ]
+}
