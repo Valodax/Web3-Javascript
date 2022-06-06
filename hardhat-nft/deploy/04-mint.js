@@ -15,7 +15,7 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
     const randomIpfsNftMintTx = await randomIpfsNft.requestNft({ value: mintFee.toString() })
 
     await new Promise(async (resolve, reject) => {
-        setTimeout(resolve, 300000) // 5mins
+        setTimeout(resolve, 600000) // 5mins
         randomIpfsNft.once("NftMinted", async function () {
             resolve()
         })
