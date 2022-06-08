@@ -143,7 +143,7 @@ contract NftMarketplace is ReentrancyGuard {
         emit ItemCanceled(msg.sender, nftAddress, tokenId);
     }
 
-    function updateLising(
+    function updateListing(
         address nftAddress,
         uint256 tokenId,
         uint256 newPrice
