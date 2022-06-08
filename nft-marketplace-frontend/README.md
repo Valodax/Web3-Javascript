@@ -4,3 +4,8 @@
         2. If not, you can buy the listing
 2. Sell Page:
     1. You can lift your NFT on the marketplace
+
+Moralis: How do we get it to listen to our events?
+
+1. Connect it to our blockchain
+2. Which contract, which events, and what to do when it hears those events.
