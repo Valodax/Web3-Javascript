@@ -17,6 +17,16 @@ const networkConfig = {
         callbackGasLimit: "500000", //500,000 gas
         interval: "30",
     },
+    43113: {
+        name: "fuji",
+        vrfCoordinatorV2: "0x2eD832Ba664535e5886b75D64C46EB9a228C2610",
+        raffleEntranceFee: "100000000000000000",
+        url: "https://api.avax-test.network/ext/bc/C/rpc",
+        gasLane: "0x354d2f95da55398f44b7cff77da56283d9c6c829a4bdf1bbcaf2ad6a4d081f61",
+        subscriptionId: "143",
+        callbackGasLimit: "500000", //500,000 gas
+        interval: "30",
+    },
 }
 
 const developmentChains = ["hardhat", "localhost"]

@@ -21,7 +21,6 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
         vrfCoordinatorV2Address = networkConfig[chainId]["vrfCoordinatorV2"]
         subscriptionId = networkConfig[chainId]["subscriptionId"]
     }
-
     const args = [
         vrfCoordinatorV2Address,
         networkConfig[chainId]["raffleEntranceFee"],
@@ -37,7 +36,7 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
         waitConfirmations: network.config.blockConfirmations || 1,
     })
 
-    if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
+    if (!developmentChains.includes(network.name) && process.env.SNOWTRACE_API_KEY) {
         log("Verifying")
         await verify(raffle.address, args)
     }

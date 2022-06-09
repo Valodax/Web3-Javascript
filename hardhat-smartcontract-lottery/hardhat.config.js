@@ -19,6 +19,8 @@ const RINKEBY_RPC_URL =
 const KOVAN_RPC_URL = process.env.KOVAN_RPC_URL || "https://eth-kovan.alchemyapi.io/v2/your-api-key"
 const POLYGON_MAINNET_RPC_URL =
     process.env.POLYGON_MAINNET_RPC_URL || "https://polygon-mainnet.alchemyapi.io/v2/your-api-key"
+const AVALANCHE_TESTNET_RPC_URL =
+    process.env.AVALANCHE_TESTNET_RPC_URL || "https://api.avax-test.network/ext/bc/C/rpc"
 const PRIVATE_KEY = process.env.PRIVATE_KEY || "0x"
 // optional
 const MNEMONIC = process.env.MNEMONIC || "your mnemonic"
@@ -61,6 +63,13 @@ module.exports = {
             accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
             saveDeployments: true,
             chainId: 137,
+        },
+        fuji: {
+            url: AVALANCHE_TESTNET_RPC_URL,
+            accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
+            saveDeployments: true,
+            chainId: 43113,
+            gasPrice: 225000000000,
         },
     },
     etherscan: {
