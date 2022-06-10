@@ -14,16 +14,19 @@ Moralis.Cloud.afterSave("ItemListed", async (request) => {
         const query = new Moralis.Query(ActiveItem)
         query.equalTo("nftAddress", request.object.get("nftAddress"))
         query.equalTo("tokenId", request.object.get("tokenId"))
-        query.equalTo("marketplaceAddress", request.object.get("marketplaceAddress"))
+        query.equalTo("marketplaceAddress", request.object.get("address"))
         query.equalTo("seller", request.object.get("seller"))
+        logger.info(`Marketplace | Query: ${query}`)
         const alreadyListedItem = await query.first()
         if (alreadyListedItem) {
-            logger.info(`Deleting already listed ${request.object.get("objectId")}`)
+            logger.info(`Deleting ${request.object.get("objectId")}`)
             await alreadyListedItem.destroy()
             logger.info(
                 `Deleted item with tokenId ${request.object.get(
                     "tokenId"
-                )} at address ${request.object.get("address")} since it's already been listed`
+                )} at address ${request.object.get(
+                    "address"
+                )} since the listing is being updated. `
             )
         }
 
@@ -34,7 +37,7 @@ Moralis.Cloud.afterSave("ItemListed", async (request) => {
         activeItem.set("tokenId", request.object.get("tokenId"))
         activeItem.set("seller", request.object.get("seller"))
         logger.info(
-            `Adding Address: ${request.object.get("address")}. TokenId: ${request.object.get(
+            `Adding Address: ${request.object.get("address")} TokenId: ${request.object.get(
                 "tokenId"
             )}`
         )
