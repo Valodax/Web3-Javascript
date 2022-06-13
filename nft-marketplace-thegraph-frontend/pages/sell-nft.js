@@ -1,7 +1,7 @@
 import Head from "next/head"
 import Image from "next/image"
 import styles from "../styles/Home.module.css"
-import { Form, useNotification, Button, Info } from "web3uikit"
+import { Input, Form, useNotification, Button, Info } from "web3uikit"
 import { useMoralis, useWeb3Contract } from "react-moralis"
 import { ethers } from "ethers"
 import nftAbi from "../constants/BasicNft.json"
@@ -15,14 +15,16 @@ export default function Home() {
     const marketplaceAddress = networkMapping[chainString].NftMarketplace[0]
     const dispatch = useNotification()
     const [proceeds, setProceeds] = useState("0")
-
+    const [approved, setApproved] = useState("No")
     const { runContractFunction } = useWeb3Contract()
+    const [nftAddress, setNftAddress] = useState()
+    const [tokenId, setTokenId] = useState()
+    const [price, setPrice] = useState()
 
-    async function approveAndList(data) {
-        const nftAddress = data.data[0].inputResult
-        const tokenId = data.data[1].inputResult
-        const price = ethers.utils.parseUnits(data.data[2].inputResult, "ether").toString()
-
+    async function approve(nftAddress, tokenId) {
+        // let nftAddress = data.data[0].inputResult
+        // let tokenId = data.data[1].inputResult
+        // let price = ethers.utils.parseUnits(data.data[2].inputResult, "ether").toString()
         const approveOptions = {
             abi: nftAbi,
             contractAddress: nftAddress,
@@ -35,15 +37,29 @@ export default function Home() {
 
         await runContractFunction({
             params: approveOptions,
-            onSuccess: () => handleApproveSuccess(nftAddress, tokenId, price),
+            onSuccess: () => handleApproveSuccess(),
             onError: (error) => {
                 console.log(error)
             },
         })
     }
 
-    async function handleApproveSuccess(nftAddress, tokenId, price) {
-        console.log("Ok! Now time to list")
+    async function handleApproveSuccess() {
+        dispatch({
+            type: "success",
+            message: "You have successfully approved your NFT.",
+            title: "Success!",
+            position: "topR",
+        })
+        return setApproved("Yes")
+    }
+
+    async function list(nftAddress, tokenId, price) {
+        console.log("test")
+        // let nftAddress = data.data[0].inputResult
+        // let tokenId = data.data[1].inputResult
+        // let price = ethers.utils.parseUnits(data.data[2].inputResult, "ether").toString()
+
         const listOptions = {
             abi: nftMarketplaceAbi,
             contractAddress: marketplaceAddress,
@@ -65,8 +81,8 @@ export default function Home() {
     async function handleListSuccess() {
         dispatch({
             type: "success",
-            message: "NFT listing",
-            title: "NFT listed",
+            message: "You have successfully listed your NFT.",
+            title: "Success!",
             position: "topR",
         })
     }
@@ -74,7 +90,8 @@ export default function Home() {
     const handleWithdrawSuccess = () => {
         dispatch({
             type: "success",
-            message: "Withdrawing proceeds",
+            message: "You have successfully withdrawn your proceeds",
+            title: "Success!",
             position: "topR",
         })
     }
@@ -102,35 +119,62 @@ export default function Home() {
 
     return (
         <div className="container mx-auto">
-            <Form
-                buttonConfig={{ text: "submit", theme: "outline" }}
-                onSubmit={approveAndList}
-                data={[
-                    {
-                        name: "NFT Address",
-                        type: "text",
-                        inputWidth: "50%",
-                        value: "",
-                        key: "nftAddress",
-                    },
-                    {
-                        name: "Token ID",
-                        type: "number",
-                        value: "",
-                        key: "token",
-                    },
-                    {
-                        name: "Price (in ETH)",
-                        type: "number",
-                        value: "",
-                        key: "price",
-                    },
-                ]}
-                title="Sell your NFT!"
-                id="Main Form"
-            ></Form>
+            <h1 className="py-4 px-4 text-2xl font-sanserif">Sell your NFT!</h1>
+            <div className="pl-4">
+                <Input
+                    label="NFT Address"
+                    width="50%"
+                    name="NFT Address"
+                    onBlur={function noRefCheck() {}}
+                    type="text"
+                    value=""
+                    key="nftAddress"
+                    onChange={(e) => setNftAddress(e.target.value)}
+                />
+                <br />
+                <Input
+                    label="Token ID"
+                    name="Test text Input"
+                    onBlur={function noRefCheck() {}}
+                    type="number"
+                    valueAsNumber=""
+                    key="token"
+                    onChange={(e) => setTokenId(e.target.value)}
+                />
+                <br />
+                <Input
+                    label="Price (in ETH)"
+                    name="Test text Input"
+                    onBlur={function noRefCheck() {}}
+                    type="number"
+                    valueAsNumber=""
+                    key="price"
+                    onChange={(e) => setPrice(ethers.utils.parseUnits(e.target.value, "ether"))}
+                />
+                <br />
+                <div>
+                    {approved == "No" ? (
+                        <Button
+                            size="medium"
+                            theme="outline"
+                            onClick={() => {
+                                approve(nftAddress, tokenId)
+                            }}
+                            text="Approve"
+                        />
+                    ) : (
+                        <Button
+                            size="medium"
+                            theme="outline"
+                            onClick={() => {
+                                list(nftAddress, tokenId, price)
+                            }}
+                            text="List"
+                        />
+                    )}
+                </div>
+            </div>
             <br />
-
             <div className="pl-4">
                 {proceeds != 0 ? (
                     <Button
@@ -152,7 +196,12 @@ export default function Home() {
                         type="button"
                     />
                 ) : (
-                    <Button theme="ghost" size="large" text="No profits detected"></Button>
+                    <Button
+                        theme="ghost"
+                        size="large"
+                        text="No profits detected"
+                        disabled
+                    ></Button>
                 )}
             </div>
         </div>

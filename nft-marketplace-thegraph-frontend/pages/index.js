@@ -51,7 +51,7 @@ export default function Home() {
                         })
                     )
                 ) : (
-                    <div>Web3 Currently Not Enabled</div>
+                    <div>Please connect your wallet to the Rinkeby Testnet</div>
                 )}
             </div>
         </div>

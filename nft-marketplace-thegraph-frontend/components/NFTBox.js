@@ -95,8 +95,8 @@ export default function NFTBox({ price, nftAddress, tokenId, marketplaceAddress,
     const handleBuyItemSuccess = () => {
         dispatch({
             type: "success",
-            message: `You have just bought ${tokenName}`,
-            title: "Item Bought",
+            message: `You have successfully bought ${tokenName}!`,
+            title: "Success!",
             position: "topR",
         })
     }
@@ -125,7 +125,7 @@ export default function NFTBox({ price, nftAddress, tokenId, marketplaceAddress,
                                 <div className="flex flex-col items-end gap-2">
                                     <div className="text-base">TokenID: {tokenId}</div>
                                     <div className="italic text-sm">
-                                        Owned by {formattedSellerAddress}
+                                        Owner: {formattedSellerAddress}
                                     </div>
                                     <Image
                                         loader={() => imageURI}

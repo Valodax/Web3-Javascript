@@ -44,6 +44,7 @@ export default function UpdateListingModal({
             isVisible={isVisible}
             onCancel={onClose}
             onCloseButtonPressed={onClose}
+            width="50%"
             onOk={() => {
                 updateListing({
                     onError: (error) => {
