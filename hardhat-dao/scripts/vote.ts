@@ -11,7 +11,7 @@ async function main(proposalIndex: number) {
   const proposalId = proposals[network.config.chainId!][proposalIndex]
   // 0 = Against, 1 = For, 2 = Abstain for this example
   const voteWay = 1
-  const reason = "I lika do da cha cha"
+  const reason = "Because I do"
   await vote(proposalId, voteWay, reason)
 }
 
