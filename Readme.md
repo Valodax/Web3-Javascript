@@ -7,7 +7,7 @@ Please note that this version of the DAPP is currently only live on the Rinkeby 
 [<h3>View the site live on IPFS here.</h3>](https://crimson-union-3359.on.fleek.co/)
 
 
-[<h4>View the smart contract</h4>](https://rinkeby.etherscan.io/address/0x57CFDCc62dAcd479B14d2625B97E78D87107ABC5#code)
+[<h4>*View the smart contract*</h4>](https://rinkeby.etherscan.io/address/0x57CFDCc62dAcd479B14d2625B97E78D87107ABC5#code)
 
 <h2>Project 2: NFT Marketplace</h1>
 The following is a fully end-to-end decentralised application using IPFS for the front-end and TheGraph protocol for indexing the smart contract on Ethereum.
@@ -16,5 +16,6 @@ Please note that this version of the DAPP is also currently live on the Rinkeby 
 [<h3>View the site live on IPFS here.</h3>](https://plain-smoke-5427.on.fleek.co/)
 
 
-[<h4>View the smart contract</h4>](https://rinkeby.etherscan.io/address/0xe7ee9d708712cb4522e6b0347da59794fd241efa#code)
-[<h4>View my custom NFT here</h4>](https://rinkeby.etherscan.io/address/0xbb13774f32f6d94d706baed1c3b687eeda7f38ff#code)
+[<h4>*View the smart contract*</h4>](https://rinkeby.etherscan.io/address/0xe7ee9d708712cb4522e6b0347da59794fd241efa#code)
+
+[<h4>*View my custom NFT here*</h4>](https://rinkeby.etherscan.io/address/0xbb13774f32f6d94d706baed1c3b687eeda7f38ff)
