@@ -88,7 +88,7 @@ module.exports = {
             polygon: POLYGONSCAN_API_KEY,
         },
     },
-    gasReporter: {
+    cdReporter: {
         enabled: REPORT_GAS,
         currency: "USD",
         outputFile: "gas-report.txt",
